@@ -1,37 +1,33 @@
-import React from "react";
-import { AppProps } from "next/app";
-import { Refine } from "@pankod/refine-core";
+import React from 'react'
+import { AppProps } from 'next/app'
+import { Refine } from '@pankod/refine-core'
 import {
   notificationProvider,
   ReadyPage,
   ErrorComponent,
-  AuthPage,
-} from "@pankod/refine-antd";
-import routerProvider from "@pankod/refine-nextjs-router";
-import dataProvider, { GraphQLClient } from "@pankod/refine-graphql";
-import "@pankod/refine-antd/dist/reset.css";
-import { ColorModeContextProvider } from "@contexts";
+  AuthPage
+} from '@pankod/refine-antd'
+import { AntdInferencer } from '@pankod/refine-inferencer/antd'
+import routerProvider from '@pankod/refine-nextjs-router'
+import '@pankod/refine-antd/dist/reset.css'
+import { ColorModeContextProvider } from '@contexts'
 import {
   Title,
   Header,
   Sider,
   Footer,
   Layout,
-  OffLayoutArea,
-} from "@components/layout";
-import { authProvider } from "src/authProvider";
-
-const API_URL = "https://your-graphql-url/graphql";
-
-const client = new GraphQLClient(API_URL);
-const gqlDataProvider = dataProvider(client);
+  OffLayoutArea
+} from '@components/layout'
+import { authProvider } from 'src/authProvider'
+import { dataProvider } from 'src/dataProvider'
 
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {
   return (
     <ColorModeContextProvider>
       <Refine
         routerProvider={routerProvider}
-        dataProvider={gqlDataProvider}
+        dataProvider={dataProvider}
         notificationProvider={notificationProvider}
         ReadyPage={ReadyPage}
         catchAll={<ErrorComponent />}
@@ -43,11 +39,22 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
         OffLayoutArea={OffLayoutArea}
         authProvider={authProvider}
         LoginPage={AuthPage}
+        resources={[
+          {
+            name: 'Film',
+            list: AntdInferencer,
+            show: AntdInferencer
+          },
+          {
+            name: 'User',
+            list: AntdInferencer
+          }
+        ]}
       >
         <Component {...pageProps} />
       </Refine>
     </ColorModeContextProvider>
-  );
+  )
 }
 
-export default MyApp;
+export default MyApp
