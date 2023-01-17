@@ -7,6 +7,7 @@ import {
   ErrorComponent,
   AuthPage
 } from '@pankod/refine-antd'
+import { TeamOutlined } from '@ant-design/icons'
 import { AntdInferencer } from '@pankod/refine-inferencer/antd'
 import routerProvider from '@pankod/refine-nextjs-router'
 import '@pankod/refine-antd/dist/reset.css'
@@ -21,6 +22,11 @@ import {
 } from '@components/layout'
 import { authProvider } from 'src/authProvider'
 import { dataProvider } from 'src/dataProvider'
+import 'src/styles/globals.css'
+import { Notifications } from '@components/pages/Notifications'
+import { FilmShow } from '@components/pages/FilmShow'
+import { UserList } from '@components/pages/UserList'
+import { User } from '@components/pages/User'
 
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {
   return (
@@ -43,12 +49,15 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
           {
             name: 'Film',
             list: AntdInferencer,
-            show: AntdInferencer
+            show: FilmShow
           },
           {
             name: 'User',
-            list: AntdInferencer
-          }
+            list: UserList,
+            show: User,
+            icon: <TeamOutlined />
+          },
+          { name: 'Notifications', list: Notifications }
         ]}
       >
         <Component {...pageProps} />

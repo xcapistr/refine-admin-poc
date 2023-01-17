@@ -1,36 +1,51 @@
-import React from "react";
-import { TitleProps } from "@pankod/refine-core";
-import { Link } from "@pankod/refine-nextjs-router";
+import React from 'react'
+import { TitleProps } from '@pankod/refine-core'
+import { Link } from '@pankod/refine-nextjs-router'
 
 export const Title: React.FC<TitleProps> = ({ collapsed }) => (
   <Link to="/">
-    {collapsed ? (
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <img
-          src="https://refine.ams3.cdn.digitaloceanspaces.com/logo/refine-mini.svg"
-          alt="Refine"
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: '64px'
+      }}
+    >
+      {collapsed ? (
+        <p
           style={{
-            margin: "0 auto",
-            padding: "12px 0",
-            maxHeight: "65.5px",
+            margin: 0,
+            fontFamily: '"Agrandir"',
+            fontSize: '28px'
           }}
-        />
-      </div>
-    ) : (
-      <img
-        src="https://refine.ams3.cdn.digitaloceanspaces.com/logo/refine.svg"
-        alt="Refine"
-        style={{
-          width: "200px",
-          padding: "12px 24px",
-        }}
-      />
-    )}
+        >
+          E
+        </p>
+      ) : (
+        <>
+          <p
+            style={{
+              margin: 0,
+              fontFamily: '"Agrandir"',
+              fontSize: '24px'
+            }}
+          >
+            EARNIST
+          </p>
+          <p
+            style={{
+              margin: 0,
+              fontFamily: '"Agrandir"',
+              whiteSpace: 'nowrap',
+              fontSize: '12px'
+            }}
+          >
+            ADMIN PORTAL
+          </p>
+        </>
+      )}
+    </div>
   </Link>
-);
+)
